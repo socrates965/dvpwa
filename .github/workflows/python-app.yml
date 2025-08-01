@@ -26,7 +26,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt-get install libpq-dev gcc python3.10-dev
+        sudo apt-get install libpq-dev gcc python-dev libpython3.x-dev
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
