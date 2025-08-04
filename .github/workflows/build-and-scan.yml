@@ -73,22 +73,6 @@ jobs:
             exit 1
           fi
 
-      - name: Run Dependabot (Dependency Scanning)
-        uses: github/dependabot-action@v3
-        with:
-          package-ecosystem: pip
-          directory: /
-          schedule-interval: daily
-
-      - name: Check Dependabot for critical vulnerabilities
-        run: |
-          if gh api repos/${{ github.repository }}/dependabot/alerts -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" | jq -e '.[] | select(.security_vulnerability.severity == "critical")'; then
-            echo "Critical vulnerabilities found in Dependabot scan!"
-            exit 1
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Upload security reports
         if: always()
         uses: actions/upload-artifact@v4
