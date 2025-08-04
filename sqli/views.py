@@ -2,7 +2,7 @@ import logging
 from datetime import datetime
 from itertools import groupby
 
-from aiohttp.web import Request, HTTPFound
+from aiohttp.web import Request, HTTPFound, Application
 from aiohttp.web_exceptions import HTTPNotFound, HTTPForbidden
 from aiohttp_jinja2 import template
 from aiohttp_session import get_session
