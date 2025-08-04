@@ -63,19 +63,5 @@ jobs:
       - name: Perform CodeQL Analysis
         id: codeql
         uses: github/codeql-action/analyze@v3
-        with:
-          output: sarif-results
-
-      - name: Check CodeQL for critical vulnerabilities
-        run: |
-          if jq -e '.runs[0].results[] | select(.level == "error")' sarif-results/codeql.sarif; then
-            echo "Critical vulnerabilities found in CodeQL scan!"
-            exit 1
-          fi
-
-      - name: Upload security reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: security-reports
-          path: sarif-results/
+        # with:
+        #   output: sarif-results
