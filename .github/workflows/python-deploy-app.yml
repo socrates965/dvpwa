@@ -1,6 +1,10 @@
 name: Deploy Python App via Docker Compose
 
 on:
+  workflow_run:
+    workflows: ["Python application"]
+    types:
+      - completed
   pull_request:
     types: [closed]
     branches:
@@ -13,14 +17,8 @@ jobs:
     steps:
       - name: Checkout latest code
         uses: actions/checkout@v4
-
-      - name: Install Docker Compose
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose-plugin
-          docker compose version
           
       - name: Deploy with Docker Compose
-        run: |
-          docker-compose pull
-          docker-compose up -d --remove-orphans 
+        uses: hoverkraft-tech/compose-action@v2.0.1
+        with:
+          compose-file: "./docker-compose.yml"
