@@ -1,4 +1,4 @@
-from hashlib import md5, sha256
+from hashlib import sha256
 from typing import NamedTuple, Optional
 
 from aiopg import Connection
